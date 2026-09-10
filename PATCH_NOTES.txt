@@ -1,0 +1,1 @@
+Fixes applied to index.html: normalize Indonesian phone numbers for WhatsApp (08 -> 62), add Salin Pesan action for manual sending, and keep direct WhatsApp redirect on mobile.
