@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 const SUPABASE_URL = 'https://hcyziqzfbplowikqpdiv.supabase.co';
-const SUPABASE_KEY = '';
+const SUPABASE_KEY = 'sb_publishable_luL_azGk6owIwY82TsiH7Q_14CCnbdq';
 const SHARED_PASSWORD = '';
 const BASE_INVITE = 'https://waktutemu.id/java-heritage/';
 
