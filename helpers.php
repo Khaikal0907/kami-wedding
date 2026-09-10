@@ -4,7 +4,7 @@ function e(?string $value): string { return htmlspecialchars($value ?? '', ENT_Q
 function supabaseRequest(string $method,string $path,?array $body=null,?string $accessToken=null):array{
  $ch=curl_init(SUPABASE_URL.$path); $headers=['apikey: '.RUNTIME_SUPABASE_KEY,'Content-Type: application/json']; if($accessToken)$headers[]='Authorization: Bearer '.$accessToken;
  curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_CUSTOMREQUEST=>$method,CURLOPT_HTTPHEADER=>$headers,CURLOPT_TIMEOUT=>20]); if($body!==null)curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($body,JSON_UNESCAPED_SLASHES));
- $raw=curl_exec($ch);$error=curl_error($ch);$status=(int)curl_getinfo($ch,CURLINFO_HTTP_CODE);curl_close($ch);if($error)return['status'=>0,'data'=>null,'error'=>$error];$data=json_decode($raw?:'null',true);return['status'=>$status,'data'=>$data,'error'=>$status>=400?($data['message']??$data['error_description']??'Request failed'):null];
+ $raw=curl_exec($ch);$error=curl_error($ch);$status=(int)curl_getinfo($ch,CURLINFO_HTTP_CODE);unset($ch);if($error)return['status'=>0,'data'=>null,'error'=>$error];$data=json_decode($raw?:'null',true);return['status'=>$status,'data'=>$data,'error'=>$status>=400?($data['message']??$data['error_description']??'Request failed'):null];
 }
 function requireLogin():void{if(empty($_SESSION['access_token'])||empty($_SESSION['username'])){header('Location: index.php');exit;}}
 function currentUser():string{return $_SESSION['username']??'';} function isKhaikal():bool{return currentUser()==='khaikal';} function authToken():string{return $_SESSION['access_token']??'';}
