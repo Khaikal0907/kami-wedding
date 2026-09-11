@@ -9,7 +9,50 @@ if ($path === '/' || $path === '/index.php') {
     exit;
 }
 if ($path === '/dashboard.php') {
+    ob_start();
     require __DIR__ . '/../php-version/dashboard.php';
+    $html = ob_get_clean();
+    $copyScript = <<<'HTML'
+<script>
+document.addEventListener('click', async function(e) {
+    const btn = e.target.closest('.copy-message-btn');
+    if (!btn) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const message = btn.getAttribute('data-message') || '';
+    let copied = false;
+    try {
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(message);
+            copied = true;
+        }
+    } catch (_) {}
+    if (!copied) {
+        const ta = document.createElement('textarea');
+        ta.value = message;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { copied = document.execCommand('copy'); } catch (_) {}
+        ta.remove();
+    }
+    const icon = btn.querySelector('i');
+    const oldIcon = icon ? icon.className : '';
+    const oldTitle = btn.title;
+    if (copied) {
+        if (icon) icon.className = 'bi bi-check2';
+        btn.title = 'Tersalin!';
+        setTimeout(() => {
+            if (icon) icon.className = oldIcon;
+            btn.title = oldTitle;
+        }, 1200);
+    }
+}, true);
+</script>
+HTML;
+    echo str_replace('</body>', $copyScript . '</body>', $html);
     exit;
 }
 if ($path === '/logout.php') {
