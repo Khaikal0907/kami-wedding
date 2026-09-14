@@ -12,6 +12,7 @@ if ($path === '/dashboard.php') {
     ob_start();
     require __DIR__ . '/../php-version/dashboard.php';
     $html = ob_get_clean();
+    $html = str_replace('</head>', '<link rel="icon" type="image/svg+xml" href="/favicon.svg"></head>', $html);
     $copyScript = <<<'HTML'
 <script>
 document.addEventListener('click', async function(e) {
