@@ -4,6 +4,18 @@ declare(strict_types=1);
 $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 $path = rtrim($path, '/') ?: '/';
 
+if ($path === '/favicon.svg') {
+    $file = __DIR__ . '/../favicon.svg';
+    if (is_file($file)) {
+        header('Content-Type: image/svg+xml');
+        header('Cache-Control: public, max-age=86400');
+        readfile($file);
+        exit;
+    }
+    http_response_code(404);
+    exit;
+}
+
 if ($path === '/' || $path === '/index.php') {
     require __DIR__ . '/../index.php';
     exit;
