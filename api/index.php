@@ -20,10 +20,16 @@ if ($path === '/dashboard.php') {
 .mobile-menu-toggle,.mobile-menu-backdrop{display:none}
 @media(max-width:768px){
  body{overflow-x:hidden}
- .sidebar{position:fixed!important;z-index:1050;left:0;top:0;width:250px!important;height:100vh;min-height:100vh;transform:translateX(-100%);transition:transform .22s ease;box-shadow:10px 0 30px rgba(0,0,0,.18);padding-top:18px!important}
+ .sidebar{position:fixed!important;z-index:1050;left:0;top:0;width:250px!important;height:100vh;min-height:100vh;transform:translateX(-100%);transition:transform .22s ease;box-shadow:10px 0 30px rgba(0,0,0,.18);padding:18px 14px!important}
+ .sidebar .brand{display:flex!important;align-items:center!important;gap:10px!important;padding:10px 8px!important;margin-bottom:24px!important;white-space:nowrap}
+ .sidebar .brand i{display:block!important;width:22px!important;min-width:22px!important;margin:0!important;text-align:center!important;line-height:1}
  .sidebar .brand-text,.sidebar .nav-text,.sidebar .logout-text{display:inline!important}
- .sidebar .nav-link{justify-content:flex-start!important;padding:10px 14px}
- .sidebar .logout-link{justify-content:flex-start!important;padding:10px 14px}
+ .sidebar nav{width:100%}
+ .sidebar .nav-link{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;padding:11px 12px!important;min-height:44px;margin:4px 0!important;white-space:nowrap}
+ .sidebar .nav-link i{display:block!important;width:22px!important;min-width:22px!important;margin:0!important;text-align:center!important;line-height:1}
+ .sidebar .nav-link span{display:block!important;line-height:1.2!important}
+ .sidebar .logout-link{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;padding:11px 12px!important;white-space:nowrap}
+ .sidebar .logout-link i{width:22px!important;min-width:22px!important;text-align:center!important}
  body.mobile-menu-open .sidebar{transform:translateX(0)}
  .mobile-menu-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:1040}
  body.mobile-menu-open .mobile-menu-backdrop{display:block}
