@@ -24,7 +24,7 @@ if ($path === '/dashboard.php') {
     ob_start();
     require __DIR__ . '/../php-version/dashboard.php';
     $html = ob_get_clean();
-    $html = str_replace('</head>', '<link rel="icon" type="image/svg+xml" href="/favicon.svg"></head>', $html);
+    $html = str_replace('</head>', '<link rel="icon" type="image/svg+xml" href="/favicon.svg"><style>.d-flex.justify-content-end.gap-1>form:first-of-type{order:-1}</style></head>', $html);
     $copyScript = <<<'HTML'
 <script>
 document.addEventListener('click', async function(e) {
