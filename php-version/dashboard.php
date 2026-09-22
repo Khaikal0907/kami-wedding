@@ -8,6 +8,15 @@ $html = ob_get_clean();
 $script = <<<'HTML'
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    // Make the current CSRF token available to injected bulk-input scripts.
+    if (typeof csrf !== 'undefined' && !document.querySelector('input[name="csrf"]')) {
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = 'csrf';
+        csrfInput.value = csrf;
+        document.body.appendChild(csrfInput);
+    }
+
     const selectAllBtn = document.getElementById('selectAllBtn');
     const blastBtn = document.getElementById('blastBtn');
     if (!selectAllBtn || !blastBtn || document.getElementById('deleteSelectedBtn')) return;
